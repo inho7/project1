@@ -18,8 +18,8 @@ url = "https://news.naver.com/section/100"
 
 # Selenium WebDriver 설정
 options = wb.ChromeOptions()
-options.add_argument("--user-data-dir=C:/temp/new_chrome_profile")
-options.add_argument("--remote-debugging-port=9222")
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
 driver = wb.Chrome(options=options)
 driver.get(url)
 
