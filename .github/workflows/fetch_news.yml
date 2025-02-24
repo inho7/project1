@@ -16,6 +16,10 @@ jobs:
       - name: 저장소 체크아웃
         uses: actions/checkout@v3  # 현재 GitHub 저장소를 clone
 
+      - name: 인터넷 연결 확인
+        run: |
+          ping -c 3 google.com || echo "인터넷 연결 문제 가능성 있음"
+
       - name: Python 설정
         uses: actions/setup-python@v4  # Python 설치
         with:
@@ -41,7 +45,16 @@ jobs:
           
           # Chrome 버전에 맞는 Chromedriver 설치
           CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | cut -d '.' -f1) || CHROME_VERSION=113
-          DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})
+          echo "Chrome Version: $CHROME_VERSION"
+          
+          DRIVER_VERSION=$(curl -s "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION")
+          echo "Chromedriver Version: $DRIVER_VERSION"
+
+          if [ -z "$DRIVER_VERSION" ]; then
+            echo "Chromedriver 버전을 가져오는 데 실패했습니다. 기본값(113.0.5672.63) 사용"
+            DRIVER_VERSION="113.0.5672.63"
+          fi
+
           wget https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/
