@@ -18,6 +18,7 @@ url = "https://news.naver.com/section/100"
 
 # Selenium WebDriver 설정
 options = wb.ChromeOptions()
+options.add_argument("--user-data-dir=C:/selenium_profile")
 driver = wb.Chrome(options=options)
 driver.get(url)
 
