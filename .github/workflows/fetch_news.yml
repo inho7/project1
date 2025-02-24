@@ -40,9 +40,7 @@ jobs:
 
       - name: 뉴스 데이터 크롤링 및 저장
         run: |
-          # 크롬 실행을 위한 환경변수 설정
-          export DISPLAY=:99.0
-          sudo Xvfb :99 &  # 가상 디스플레이 시작
+          
           
           python news_script.py  # 웹 크롤링을 실행하는 Python 스크립트 실행
 
