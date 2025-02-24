@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import sqlite3
 import random
+import chromedriver_autoinstaller
 from selenium import webdriver as wb
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -11,7 +12,7 @@ from gensim.summarization import summarize
 from selenium.common.exceptions import NoSuchElementException
 from scipy.linalg import triu
 
-
+chromedriver_autoinstaller.install()
 
     
 url = "https://news.naver.com/section/100"
