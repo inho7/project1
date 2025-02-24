@@ -17,7 +17,7 @@ from scipy.linalg import triu
 url = "https://news.naver.com/section/100"
 
 # Selenium WebDriver 설정
-options = wb.ChromeOptions()
+options = wb.edgeOptions()
 driver = wb.edge(options=options)
 driver.get(url)
 
