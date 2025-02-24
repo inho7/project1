@@ -17,14 +17,9 @@ from scipy.linalg import triu
 url = "https://news.naver.com/section/100"
 
 # Selenium WebDriver 설정
-user_data_dir = (f"C:\\Users\\kccistc\\Desktop\\workspace\\user_data_{int(time.time())}")
-
 options = wb.ChromeOptions()
-
-
-options.add_argument(f"user-data-dir={user_data_dir}")
-
 driver = wb.Chrome(options=options)
+options.add_argument(r'user-data-dir=C:\User Data')
 driver.get(url)
 driver.quit()
 
