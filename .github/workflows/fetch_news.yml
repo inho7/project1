@@ -34,16 +34,21 @@ jobs:
           pip install gensim==3.8.3
           pip install scipy==1.10.1
 
-          sudo apt-get update  # 패키지 목록 업데이트
-          sudo apt-get install -y chromium-browser  # 크롬 브라우저 설치
-          sudo apt-get install -y libgsf-1-114  # 필요한 라이브러리 설치
+          sudo apt update
+          sudo apt install -y wget curl unzip gnupg
+          
+          # Install Google Chrome (Stable)
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo dpkg -i google-chrome-stable_current_amd64.deb
+          sudo apt --fix-broken install -y
 
           # 크롬 드라이버 설치 (chromium의 버전에 맞는 버전 설치)
-          CHROME_VERSION=$(chromium-browser --version | awk '{print $3}')
+           CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | sed 's/\..*//')
           DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})
           wget https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/  # 드라이버를 시스템 PATH에 추가
+          sudo mv chromedriver /usr/local/bin/
+          sudo chmod +x /usr/local/bin/chromedriver
 
       - name: 뉴스 데이터 크롤링 및 저장
         run: |
