@@ -4,7 +4,6 @@ import random
 from selenium import webdriver as wb
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
 import time
 import requests
 from bs4 import BeautifulSoup
@@ -12,20 +11,6 @@ from gensim.summarization import summarize
 from selenium.common.exceptions import NoSuchElementException
 from scipy.linalg import triu
 
-
-
-    
-url = "https://news.naver.com/section/100"
-
-# Selenium WebDriver 설정
-options = wb.ChromeOptions()
-options.add_argument("--headless")  # 브라우저 창 없이 실행
-
-chrome_options.add_argument("--no-sandbox")  # 샌드박스 문제 방지
-chrome_options.add_argument("--disable-dev-shm-usage")  # 메모리 문제 방지
-chrome_options.add_argument("--remote-debugging-port=9222")  # 디버깅 설정
-driver = wb.Chrome(options=options)
-driver.get(url)
 
 
 # 정치 뉴스 함수
@@ -546,6 +531,11 @@ def summarize_article (article_text):
     else :
         summary = article_text
     return summary
+
+url = "https://news.naver.com/section/100"
+
+driver = wb.Chrome()
+driver.get(url)
 
 
 culture_article()
