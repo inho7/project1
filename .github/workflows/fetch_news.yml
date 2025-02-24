@@ -25,7 +25,7 @@ jobs:
 
       - name: 필요한 패키지 설치
         run: | 
-          pip install --upgrade setuptools wheel
+          pip install --upgrade pip setuptools wheel  # pip를 최신 버전으로 업그레이드
           pip install numpy==1.21.0
           pip install selenium==4.8.0
           pip install flask
@@ -35,15 +35,15 @@ jobs:
           pip install scipy==1.10.1
 
           sudo apt update
-          sudo apt install -y wget curl unzip gnupg
+          sudo apt install -y wget curl unzip gnupg  # 필수 도구 설치
           
           # Install Google Chrome (Stable)
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome-stable_current_amd64.deb
-          sudo apt --fix-broken install -y
+          sudo apt --fix-broken install -y  # 의존성 문제 해결
 
           # 크롬 드라이버 설치 (chromium의 버전에 맞는 버전 설치)
-           CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | sed 's/\..*//')
+          CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | sed 's/\..*//')
           DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})
           wget https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
