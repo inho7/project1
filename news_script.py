@@ -12,6 +12,15 @@ from selenium.common.exceptions import NoSuchElementException
 from scipy.linalg import triu
 
 
+    
+url = "https://news.naver.com/section/100"
+
+# Selenium WebDriver 설정
+options = wb.ChromeOptions()
+options.add_argument("--headless")  # 브라우저 창 없이 실행
+driver = wb.Chrome(options=options)
+driver.get(url)
+
 
 # 정치 뉴스 함수
 def politic_article():
@@ -531,11 +540,6 @@ def summarize_article (article_text):
     else :
         summary = article_text
     return summary
-
-url = "https://news.naver.com/section/100"
-
-driver = wb.Chrome()
-driver.get(url)
 
 
 culture_article()
