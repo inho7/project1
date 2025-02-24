@@ -19,9 +19,10 @@ url = "https://news.naver.com/section/100"
 # Selenium WebDriver 설정
 options = wb.ChromeOptions()
 driver = wb.Chrome(options=options)
-options.add_argument(r'user-data-dir=C:\User Data')
+user_data = r"C:\data\filename" #유저의 데이터를 저장할 경로, filename은 파일명, 역슬래시 대신에 앞에 r을 붙이면 된다.
+option.add_argument(f"user-data-dir={user_data}")
 driver.get(url)
-driver.quit()
+
 
 # 정치 뉴스 함수
 def politic_article():
