@@ -38,10 +38,17 @@ jobs:
           sudo apt-get install -y chromium-browser  # 크롬 브라우저 설치
           sudo apt-get install -y libgsf-1-114  # 필요한 라이브러리 설치
 
+          # 크롬 드라이버 설치 (chromium의 버전에 맞는 버전 설치)
+          CHROME_VERSION=$(chromium-browser --version | awk '{print $3}')
+          DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})
+          wget https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/  # 드라이버를 시스템 PATH에 추가
+
       - name: 뉴스 데이터 크롤링 및 저장
         run: |
-          
-          
+          export DISPLAY=:99  # Xvfb를 사용해 가상 디스플레이 설정
+          Xvfb :99 -screen 0 1024x768x16 &  # 가상 디스플레이 실행
           python news_script.py  # 웹 크롤링을 실행하는 Python 스크립트 실행
 
       - name: 변경 사항 커밋 및 푸시
