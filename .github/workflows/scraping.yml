@@ -1,0 +1,49 @@
+name: Selenium Web Scraping
+
+on:
+  push:
+    branches:
+      - main  # main 브랜치로 푸시할 때마다 실행
+  pull_request:
+    branches:
+      - main  # main 브랜치로 PR이 발생할 때마다 실행
+
+jobs:
+  selenium-scraping:
+    runs-on: ubuntu-latest  # 우분투 환경에서 실행
+
+    steps:
+      # 1. 코드 체크아웃
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # 2. Python 설치
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # 사용할 Python 버전
+
+      # 3. Python 의존성 설치
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # requirements.txt 파일에 명시된 패키지 설치
+
+      # 4. Google Chrome 설치
+      - name: Install Google Chrome
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable  # 구글 크롬 설치
+
+      # 5. ChromeDriver 설치
+      - name: Install ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome-stable --version | awk '{print $3}')
+          CHROMEDRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION%.*})
+          wget https://chromedriver.storage.googleapis.com/${CHROMEDRIVER_VERSION}/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin  # ChromeDriver 설치
+
+      # 6. 웹 크롤링 스크립트 실행
+      - name: Run web scraping script
+        run: python scripts/news_script.py  # 크롤링 스크립트 실행
