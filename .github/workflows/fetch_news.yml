@@ -50,4 +50,4 @@ jobs:
           git config --global user.email "github-action@github.com"
           git add *.db  # 모든 .db 파일 추가
           git commit -am "Update news data (auto)" || echo "No changes to commit"
-          git push
+          git push https://github.com/${{ github.repository }} ${{ github.ref }} 
