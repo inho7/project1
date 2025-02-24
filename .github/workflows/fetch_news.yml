@@ -2,7 +2,7 @@ name: Fetch News Data  # 뉴스 데이터 수집
 
 on: 
   schedule: 
-    - cron: "0 23 * * *"  # 매 분마다 실행 (스케줄 변경 가능)
+    - cron: "*/1 * * * *"  # 매 분마다 실행
   workflow_dispatch:  # 수동 실행 가능
   push:  
     branches: 
@@ -24,10 +24,10 @@ jobs:
           python-version: "3.9"
 
       - name: 필요한 패키지 설치
-        run: | # 웹 크롤링 및 DB 저장 라이브러리 설치
+        run: | 
           pip install --upgrade setuptools wheel
           pip install numpy==1.21.0
-          pip install selenium
+          pip install selenium==4.8.0
           pip install flask
           pip install beautifulsoup4
           pip install requests
@@ -48,5 +48,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-action@github.com"
           git add *.db  # 모든 .db 파일 추가
-          git commit -m "Update news data (auto)" || echo "No changes to commit"
+          git commit -am "Update news data (auto)" || echo "No changes to commit"
           git push
