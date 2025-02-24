@@ -25,7 +25,7 @@ jobs:
         run: | 
           sudo apt update
           sudo apt install -y wget curl unzip gnupg xvfb  # 필수 도구 설치
-          sudo apt install -y build-essential python3-dev libopenblas-dev gfortran cython
+          sudo apt install -y build-essential python3-dev libopenblas-dev gfortran cython3  # cython -> cython3 변경
           
           pip install --upgrade pip setuptools wheel  # pip 최신화
           pip install numpy==1.21.0 selenium==4.8.0 flask beautifulsoup4 requests
