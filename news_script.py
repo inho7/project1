@@ -18,6 +18,10 @@ url = "https://news.naver.com/section/100"
 # Selenium WebDriver 설정
 options = wb.ChromeOptions()
 options.add_argument("--headless")  # 브라우저 창 없이 실행
+
+chrome_options.add_argument("--no-sandbox")  # 샌드박스 문제 방지
+chrome_options.add_argument("--disable-dev-shm-usage")  # 메모리 문제 방지
+chrome_options.add_argument("--remote-debugging-port=9222")  # 디버깅 설정
 driver = wb.Chrome(options=options)
 driver.get(url)
 
