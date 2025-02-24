@@ -18,9 +18,7 @@ url = "https://news.naver.com/section/100"
 
 # Selenium WebDriver 설정
 options = wb.ChromeOptions()
-driver = wb.Chrome(options=options)
-options.add_argument("user-data-dir=C:\\Users\\kccistc\\AppData\\Local\\Google\\Chrome\\User Data")
-options.add_argument("profile-directory=Profile 1")  # 특정 프로필 지정
+driver = wb.edge(options=options)
 driver.get(url)
 
 
