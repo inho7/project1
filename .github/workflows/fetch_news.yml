@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: 저장소 체크아웃
         uses: actions/checkout@v3  # 현재 GitHub 저장소를 clone
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}  # GitHub 권한 사용
 
       - name: Python 설정
         uses: actions/setup-python@v4  # Python 설치
@@ -26,16 +24,10 @@ jobs:
       - name: 필요한 패키지 설치
         run: | 
           pip install --upgrade pip setuptools wheel  # pip를 최신 버전으로 업그레이드
-          pip install numpy==1.21.0
-          pip install selenium==4.8.0
-          pip install flask
-          pip install beautifulsoup4
-          pip install requests
-          pip install gensim==3.8.3
-          pip install scipy==1.10.1
+          pip install numpy==1.21.0 selenium==4.8.0 flask beautifulsoup4 requests gensim==3.8.3 scipy==1.10.1
 
           sudo apt update
-          sudo apt install -y wget curl unzip gnupg  # 필수 도구 설치
+          sudo apt install -y wget curl unzip gnupg xvfb  # 필수 도구 설치
           
           # Install Google Chrome (Stable)
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
@@ -43,7 +35,7 @@ jobs:
           sudo apt --fix-broken install -y  # 의존성 문제 해결
 
           # 크롬 드라이버 설치 (chromium의 버전에 맞는 버전 설치)
-          CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | sed 's/\..*//')
+          CHROME_VERSION=$(google-chrome --version | awk '{print $3}' | sed 's/\..*//') || CHROME_VERSION=113
           DRIVER_VERSION=$(curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})
           wget https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
@@ -62,4 +54,4 @@ jobs:
           git config --global user.email "github-action@github.com"
           git add *.db  # 모든 .db 파일 추가
           git commit -am "Update news data (auto)" || echo "No changes to commit"
-          git push https://github.com/${{ github.repository }} ${{ github.ref }} 
+          git push origin main
