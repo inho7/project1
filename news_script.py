@@ -10,8 +10,7 @@ from bs4 import BeautifulSoup
 from gensim.summarization import summarize
 from selenium.common.exceptions import NoSuchElementException
 from scipy.linalg import triu
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+
 
     
 url = "https://news.naver.com/section/100"
@@ -60,11 +59,6 @@ def politic_article():
 
     # 헤드라인 누르기 정치, 경제, 사회 ,생활/문화, IT/과학, 세계 모두 동일한 코드임
     headline_banner = driver.find_element(By.CSS_SELECTOR, "#newsct>div>div>a")
-    wait = WebDriverWait(driver, 2)  # 최대 10초 대기
-    headline_banner = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#newsct>div>div>a")))
-
-
-
     headline_banner.click()
 
     # for문 돌면서 헤드라인 뉴스 10개까지 수집. 10개 이하면 try, except 구문을 통해 빠져나옴.
@@ -144,10 +138,6 @@ def economy_article():
 
     # 헤드라인 누르기 정치, 경제, 사회 ,생활/문화, IT/과학, 세계 모두 동일한 코드임
     headline_banner = driver.find_element(By.CSS_SELECTOR, "#newsct>div>div>a")
-    wait = WebDriverWait(driver, 2)  # 최대 10초 대기
-    headline_banner = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#newsct>div>div>a")))
-
-
     headline_banner.click()
 
     # for문 돌면서 헤드라인 뉴스 10개까지 수집. 10개 이하면 try, except 구문을 통해 빠져나옴.
@@ -228,8 +218,6 @@ def society_article():
 
     # 헤드라인 누르기 정치, 경제, 사회 ,생활/문화, IT/과학, 세계 모두 동일한 코드임
     headline_banner = driver.find_element(By.CSS_SELECTOR, "#newsct>div>div>a")
-    wait = WebDriverWait(driver, 2)  # 최대 10초 대기
-    headline_banner = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#newsct>div>div>a")))
     headline_banner.click()
 
     # for문 돌면서 헤드라인 뉴스 10개까지 수집. 10개 이하면 try, except 구문을 통해 빠져나옴.
@@ -314,8 +302,6 @@ def culture_article():
 
     # 헤드라인 누르기 정치, 경제, 사회 ,생활/문화, IT/과학, 세계 모두 동일한 코드임
     headline_banner = driver.find_element(By.CSS_SELECTOR, "#newsct>div>div>a")
-    wait = WebDriverWait(driver, 2)  # 최대 10초 대기
-    headline_banner = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#newsct>div>div>a")))
     headline_banner.click()
 
     # for문 돌면서 헤드라인 뉴스 10개까지 수집. 10개 이하면 try, except 구문을 통해 빠져나옴.
@@ -398,8 +384,6 @@ def it_article():
 
     # 헤드라인 누르기 정치, 경제, 사회 ,생활/문화, IT/과학, 세계 모두 동일한 코드임
     headline_banner = driver.find_element(By.CSS_SELECTOR, "#newsct>div>div>a")
-    wait = WebDriverWait(driver, 2)  # 최대 10초 대기
-    headline_banner = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#newsct>div>div>a")))
     headline_banner.click()
 
     # for문 돌면서 헤드라인 뉴스 10개까지 수집. 10개 이하면 try, except 구문을 통해 빠져나옴.
@@ -481,8 +465,6 @@ def world_article():
 
     # 헤드라인 누르기 정치, 경제, 사회 ,생활/문화, IT/과학, 세계 모두 동일한 코드임
     headline_banner = driver.find_element(By.CSS_SELECTOR, "#newsct>div>div>a")
-    wait = WebDriverWait(driver, 2)  # 최대 10초 대기
-    headline_banner = wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "#newsct>div>div>a")))
     headline_banner.click()
 
     # for문 돌면서 헤드라인 뉴스 10개까지 수집. 10개 이하면 try, except 구문을 통해 빠져나옴.
